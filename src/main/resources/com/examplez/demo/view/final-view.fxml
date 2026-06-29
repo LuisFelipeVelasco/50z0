@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView>
+         <image>
+            <Image url="@../images/game-image.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <Label text="Gano/Perdio" textFill="#d4af37">
+               <font>
+                  <Font name="Montserrat Bold" size="35.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="35.0" />
+               </VBox.margin>
+            </Label>
+            <ImageView fitHeight="307.0" fitWidth="490.0" pickOnBounds="true" preserveRatio="true" />
+            <Label text="¿Desea jugar otra partida?" textFill="#c7c3c3">
+               <font>
+                  <Font name="Montserrat Bold" size="26.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" style="-fx-background-color: #545452;" text="Volver a jugar" textFill="#d4af37">
+                     <font>
+                        <Font name="JetBrainsMono NF Bold" size="19.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="35.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" style="-fx-background-color: #545452;" text="Abandonar juego" textFill="#c7c3c3">
+                     <font>
+                        <Font name="JetBrainsMono NF Bold" size="19.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="35.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </children>
+</Pane>
