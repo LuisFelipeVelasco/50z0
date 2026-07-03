@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1200.0">
+         <image>
+            <Image url="@../images/game-image.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lbPlayerTurn" layoutX="547.0" layoutY="281.0" text="turno de ..." textFill="#c7c3c3">
+         <font>
+            <Font name="JetBrainsMono NF Bold" size="17.0" />
+         </font>
+      </Label>
+      <VBox fx:id="vbBot2" alignment="TOP_CENTER" layoutX="355.0" layoutY="29.0" prefHeight="200.0" prefWidth="499.0">
+         <children>
+            <TextField fx:id="tfSecondBotName" alignment="CENTER" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="461.0" style="-fx-background-color: #c7c3c3;" text="maquina N">
+               <font>
+                  <Font name="Montserrat Bold" size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox fx:id="hbSecondBotCards" alignment="CENTER" prefHeight="150.0" prefWidth="465.0" spacing="14.0">
+               <children>
+                  <ImageView fx:id="imSecondBotCard1" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imSecondBotCard2" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imSecondBotCard3" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imSecondBotCard4" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children></VBox>
+      <VBox fx:id="hbPlayer" alignment="CENTER" layoutX="365.0" layoutY="564.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox fx:id="hbPlayerCards" prefHeight="100.0" prefWidth="200.0" spacing="14.0">
+               <children>
+                  <ImageView fx:id="imPlayerCard1" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imPlayerCard2" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imPlayerCard3" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imPlayerCard4" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <TextField fx:id="tfPlayerName" alignment="BOTTOM_CENTER" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="461.0" style="-fx-background-color: #D4AF17;" text="Jugador">
+               <font>
+                  <Font name="Montserrat Bold" size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </TextField>
+         </children></VBox>
+      <VBox fx:id="vbBot3" alignment="CENTER" layoutX="-107.0" layoutY="281.0" prefHeight="200.0" prefWidth="100.0" rotate="-90.0">
+         <children>
+            <TextField fx:id="tfThirdBotName" alignment="CENTER" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="461.0" style="-fx-background-color: #c7c3c3;" text="maquina N">
+               <font>
+                  <Font name="Montserrat Bold" size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox fx:id="hbThirdBotCards" prefHeight="100.0" prefWidth="200.0" spacing="14.0">
+               <children>
+                  <ImageView fx:id="imThirdBotCard1" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imThirdBotCard2" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imThirdBotCard3" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imThirdBotCard4" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="vbBot1" alignment="CENTER" layoutX="837.0" layoutY="300.0" prefHeight="200.0" prefWidth="100.0" rotate="90.0">
+         <children>
+            <TextField fx:id="tfFirstBotName" alignment="CENTER" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="461.0" style="-fx-background-color: #c7c3c3;" text="maquina N">
+               <font>
+                  <Font name="Montserrat Bold" size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox fx:id="hbFirstBotCards" prefHeight="100.0" prefWidth="200.0" spacing="14.0">
+               <children>
+                  <ImageView fx:id="imFirstBotCard4" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imFirstBotCard3" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imFirstBotCard2" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imFirstBotCard1" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Cards/black_back_suits.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox fx:id="hbDecks" layoutX="422.0" layoutY="325.0" prefHeight="100.0" prefWidth="200.0" spacing="150.0">
+         <children>
+            <ImageView fx:id="imCardDeck" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Cards/black_back_suits.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imCardInPlay" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Cards/black_back_suits.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</Pane>
