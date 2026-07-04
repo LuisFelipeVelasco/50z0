@@ -6,8 +6,10 @@ public class PlayerHuman extends Player{
     public PlayerHuman(List<Card> deckCards, int turn) {
         super(deckCards, turn);
     }
-boolean RondState=false;
-public boolean getRondState(){
+    boolean RondState;
+    //Change rondState for roundState
+    // add a method to set the roundState
+    public boolean getRondState(){
     return RondState;
 }
 
