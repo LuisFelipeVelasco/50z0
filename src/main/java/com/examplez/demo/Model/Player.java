@@ -20,11 +20,11 @@ public class Player {
         handCard.add(card);
 
     }
+    public void removeCard(Card card){
+        handCard.remove(card);
+    }
     public int getTurn(){
         return turn;
-    }
-    public void deleteCard(Card cardSelected){
-        handCard.remove(cardSelected);
     }
 
 }
