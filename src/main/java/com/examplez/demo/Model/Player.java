@@ -23,5 +23,8 @@ public class Player {
     public int getTurn(){
         return turn;
     }
+    public void deleteCard(Card cardSelected){
+        handCard.remove(cardSelected);
+    }
 
 }

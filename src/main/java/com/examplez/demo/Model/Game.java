@@ -89,19 +89,23 @@ public class Game {
 
 
     void processCardPlayedByMachinePlayer(int turnMachinePlayer){
-        Card cardPlayed= getCardPlayedByMachinePlayer(turnMachinePlayer);
+        Player playerMachine= getMachinePlayerByTurn(turnMachinePlayer);
+        Card cardPlayed= getCardPlayedByMachinePlayer(playerMachine);
         currentSumGame+=cardPlayed.getCardValue();
         addCardPlayedToDiscardPile(cardPlayed);
         currenCardPlayed=cardPlayed;
         addDeskCardToPlayerHand(turnMachinePlayer);
+        playerMachine.deleteCard(cardPlayed);
     }
 
-    void processCardPlayedByHumanPlayer(int turnMachinePlayer , String id){
+    void processCardPlayedByHumanPlayer(int turnHumanPlayer , String id){
+        Player playerHuman=getHumanPlayer();
         Card cardPlayed= getCardById(id);
         currentSumGame+=cardPlayed.getCardValue();
         addCardPlayedToDiscardPile(cardPlayed);
         currenCardPlayed=cardPlayed;
-        addDeskCardToPlayerHand(turnMachinePlayer);
+        addDeskCardToPlayerHand(turnHumanPlayer);
+        playerHuman.deleteCard(cardPlayed);
     }
 
     void addCardPlayedToDiscardPile(Card cardPlayed) {
@@ -115,6 +119,22 @@ public class Game {
             }
         }
     }
+    PlayerMachine getMachinePlayerByTurn(int turnPlayer){
+        for (Player p:players ) {
+            if (p.getTurn() == turnPlayer && p instanceof PlayerMachine machine) {
+                return machine;
+            }
+        }
+        return null;
+    }
+    Player getHumanPlayer(){
+        for (Player p:players ) {
+            if (p.getTurn() == 0) {
+                return p;
+            }
+        }
+        return null;
+    }
     Card getCardById(String id){
         for(Card c:getHandHumanPlayer()){
             if(c.getIdCard().equals(id)){
@@ -123,12 +143,10 @@ public class Game {
         }
         return null;
     }
-    Card getCardPlayedByMachinePlayer(int turnMachinePlayer){
-        for (Player p:players) {
-            if (p.getTurn() == turnMachinePlayer  && p instanceof PlayerMachine machine) {
+    Card getCardPlayedByMachinePlayer(Player playerMachine){
+            if (playerMachine instanceof PlayerMachine machine) {
                 return machine.cardPlayed(currentSumGame, maximumSumGame);
             }
-        }
         return null;
     }
 
