@@ -8,7 +8,7 @@ public class DiscardPile {
     void addNewCard(Card newCard){
         DiscardPile.add(newCard);
     }
-    List<Card> getDiscardPile(){return DiscardPile;}
+    Card getLastCard(){return DiscardPile.get(DiscardPile.size()-1);}
     List<Card> getCardsExceptLastOne(){
         return DiscardPile.subList(0,DiscardPile.size()-2);
     }

@@ -9,11 +9,11 @@ public class PlayerHuman extends Player{
     boolean roundState;
     //Change rondState for roundState
     // add a method to set the roundState
-    public boolean getRondState(){
+    public boolean getRoundState(){
     return roundState;
 }
-public void setRondState(boolean rondState){
-        this.roundState=rondState;
+public void setRoundState(boolean roundState){
+        this.roundState=roundState;
 
     }
 }
