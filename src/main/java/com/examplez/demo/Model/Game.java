@@ -96,8 +96,8 @@ public class Game {
         addDeskCardToPlayerHand(turnMachinePlayer);
     }
 
-    void processCardPlayedByHumanPlayer(int turnMachinePlayer , String cardDirection){
-        Card cardPlayed= getCardByDirection(cardDirection);
+    void processCardPlayedByHumanPlayer(int turnMachinePlayer , String id){
+        Card cardPlayed= getCardById(id);
         currentSumGame+=cardPlayed.getCardValue();
         addCardPlayedToDiscardPile(cardPlayed);
         currenCardPlayed=cardPlayed;
@@ -115,10 +115,9 @@ public class Game {
             }
         }
     }
-    Card getCardByDirection(String cardDirection){
-        String idCard = cardDirection.substring(0, 2);
+    Card getCardById(String id){
         for(Card c:getHandHumanPlayer()){
-            if(c.getIdCard()==idCard){
+            if(c.getIdCard().equals(id)){
                 return c;
             }
         }
@@ -142,26 +141,6 @@ public class Game {
         return List.of();
     }
 
-    List<String>getCardDirectionsHandHumanPlayer(){
-        List<Card> handHuman= getHandHumanPlayer();
-        List<String>CardDirectionHandHumanPlayer=new ArrayList<>();
-        for(Card c:handHuman){
-            CardDirectionHandHumanPlayer.add(getDirectionCurrentCard(c));
-        }
-        return CardDirectionHandHumanPlayer;
-    }
-
-    String getDirectionCurrentCardPlayed(){
-        String id= currenCardPlayed.getIdCard();
-        String value= String.valueOf(currenCardPlayed.getCardValue());
-        return id+"-"+value+".png";
-    }
-
-    String getDirectionCurrentCard( Card card){
-        String id= card.getIdCard();
-        String value= String.valueOf(card.getCardValue());
-        return id+"-"+value+".png";
-    }
 
     Card drawRandomCard(List<Card> setCards) {
         int randomIndex = ThreadLocalRandom.current().nextInt(1, setCards.size());
