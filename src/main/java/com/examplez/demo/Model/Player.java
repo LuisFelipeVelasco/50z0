@@ -20,6 +20,7 @@ public class Player {
         handCard.add(card);
 
     }
+
     public int getTurn(){
         return turn;
     }
