@@ -36,22 +36,22 @@
                <children>
                   <ImageView fx:id="imSecondBotCard1" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imSecondBotCard2" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imSecondBotCard3" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imSecondBotCard4" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                </children>
@@ -63,22 +63,22 @@
                <children>
                   <ImageView fx:id="imPlayerCard1" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imPlayerCard2" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imPlayerCard3" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imPlayerCard4" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                </children>
@@ -106,22 +106,22 @@
                <children>
                   <ImageView fx:id="imThirdBotCard1" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imThirdBotCard2" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imThirdBotCard3" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imThirdBotCard4" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                </children>
@@ -142,22 +142,22 @@
                <children>
                   <ImageView fx:id="imFirstBotCard4" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imFirstBotCard3" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imFirstBotCard2" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="imFirstBotCard1" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/Cards/black_back_suits.png" />
+                        <Image url="@../images/Cards/00-00.png" />
                      </image>
                   </ImageView>
                </children>
@@ -168,12 +168,12 @@
          <children>
             <ImageView fx:id="imCardDeck" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Cards/black_back_suits.png" />
+                  <Image url="@../images/Cards/00-00.png" />
                </image>
             </ImageView>
             <ImageView fx:id="imCardInPlay" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Cards/black_back_suits.png" />
+                  <Image url="@../images/Cards/00-00.png" />
                </image>
             </ImageView>
          </children>
