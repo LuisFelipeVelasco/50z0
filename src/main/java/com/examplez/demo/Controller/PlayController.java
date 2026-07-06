@@ -106,7 +106,7 @@ public class PlayController {
             String path = "/com/examplez/demo/images/Cards/"
                     + card.getIdCard()
                     + "-"
-                    + String.format("%02d", card.getCardValue())
+                    + card.getCardValue()
                     + ".png";
 
             InputStream stream = getClass().getResourceAsStream(path);
@@ -137,7 +137,7 @@ public class PlayController {
         String path = "/com/examplez/demo/images/Cards/"
                 + card.getIdCard()
                 + "-"
-                + String.format("%02d", card.getCardValue())
+                + card.getCardValue()
                 + ".png";
         Image image = new Image(getClass().getResourceAsStream(path));
 
