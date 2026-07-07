@@ -42,19 +42,15 @@ public class PlayController {
     int numberOfPlayers;
     Stage stage;
     public void setStage(Stage stage){this.stage=stage;}
-    public void setNumberOfPlayers(int numberOfPlayers) throws InterruptedException {this.numberOfPlayers=numberOfPlayers;
-        updateBoard();
-        startGame();
-    }
+    public void setNumberOfPlayers(int numberOfPlayers) throws InterruptedException {this.numberOfPlayers=numberOfPlayers;}
     @FXML
 
     //TASK: Generate the cards on the board depending on the number of players
 
     private void initialize() throws InterruptedException {
-
+        updateBoard();
+        startGame();
         cardsImages = new ArrayList<>();
-
-
         for (Node node : hbPlayerCards.getChildren()) {
             if (node instanceof ImageView imageView) {
                 cardsImages.add(imageView);
