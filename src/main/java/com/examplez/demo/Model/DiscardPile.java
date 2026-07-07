@@ -10,7 +10,8 @@ public class DiscardPile {
     }
    public Card getLastCard(){return DiscardPile.get(DiscardPile.size()-1);}
     List<Card> getCardsExceptLastOne(){
-        return DiscardPile.subList(0,DiscardPile.size()-2);
+        return DiscardPile.subList(0,DiscardPile.size()-1);
+        //-2
     }
 
 }

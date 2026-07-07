@@ -25,8 +25,14 @@ public class Game {
     public void startGame() {
         players=new ArrayList<>();
         List<Card> setCards = setCards();
+        //Card initialCard = drawRandomCard(setCards);
+        //discardPileGame = new DiscardPile(List.of(initialCard));
         Card initialCard = drawRandomCard(setCards);
-        discardPileGame = new DiscardPile(List.of(initialCard));
+
+        List<Card> discardCards = new ArrayList<>();
+        discardCards.add(initialCard);
+
+        discardPileGame = new DiscardPile(discardCards);
         currentSumGame = initialCard.getCardValue();
         setPlayers(setCards);
         deskGame = new Desk(setCards);
@@ -168,7 +174,8 @@ public class Game {
 
 
     Card drawRandomCard(List<Card> setCards) {
-        int randomIndex = ThreadLocalRandom.current().nextInt(1, setCards.size());
+        //1
+        int randomIndex = ThreadLocalRandom.current().nextInt(0, setCards.size());
         Card randomCard = setCards.get(randomIndex);
         setCards.remove(randomIndex);
         return randomCard;
@@ -197,6 +204,9 @@ public class Game {
     public synchronized void endRound() {
         getHumanPlayer().setTurnState(false);
         notifyAll();
+    }
+    public int getWinner() {
+        return getTurnPlayers().get(0);
     }
 
 }
