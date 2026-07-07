@@ -12,12 +12,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-
+import javafx.application.Platform;
 import java.io.InputStream;
 import java.util.ArrayList;
 import javafx.scene.control.Label;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayController {
@@ -42,14 +41,15 @@ public class PlayController {
     int numberOfPlayers;
     Stage stage;
     public void setStage(Stage stage){this.stage=stage;}
-    public void setNumberOfPlayers(int numberOfPlayers) throws InterruptedException {this.numberOfPlayers=numberOfPlayers;}
+    public void setNumberOfPlayers(int numberOfPlayers) throws InterruptedException {this.numberOfPlayers=numberOfPlayers;
+        updateBoard();
+        startGame();}
     @FXML
 
     //TASK: Generate the cards on the board depending on the number of players
 
     private void initialize() throws InterruptedException {
-        updateBoard();
-        startGame();
+
         cardsImages = new ArrayList<>();
         for (Node node : hbPlayerCards.getChildren()) {
             if (node instanceof ImageView imageView) {
@@ -60,14 +60,32 @@ public class PlayController {
 
     }
     protected void startGame() throws InterruptedException {
-        game = new Game(numberOfPlayers);     // Humano + 3 máquinas
+       // game = new Game(numberOfPlayers);     // Humano + 3 máquinas
+        //game.startGame();
+        //showHandCardPlayer();
+        //showCardPile();
+        //controlTurns();
+        game = new Game(numberOfPlayers);
         game.startGame();
+
         showHandCardPlayer();
         showCardPile();
-        controlTurns();
+
+        Thread thread = new Thread(() -> {
+            try {
+                controlTurns();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        thread.setDaemon(true);
+        thread.start();
     }
     protected void controlTurns() throws InterruptedException {
+       /*
         List<Integer>turnPlayers=game.getTurnPlayers();
+
         while(turnPlayers.size()>1){
             for(int t: game.getTurnPlayers()){
                 labelGame.setText("is turn of player " + t );
@@ -85,12 +103,65 @@ public class PlayController {
                     //TASK: Delete cards of player in the board
                     else{
                         labelGame.setText("Player "+ t+ "was eliminated");
+                        eliminatePlayer(t);
 
                     }
                 }
             }
         }
-        labelGame.setText("the game is over");
+        labelGame.setText("the game is over");*/
+        while (game.getTurnPlayers().size() > 1) {
+
+            List<Integer> turnPlayers = game.getTurnPlayers();
+
+            for (int t : turnPlayers) {
+
+                Platform.runLater(() ->
+                        labelGame.setText("Player " + t + " turn"));
+
+                if (t == 0) {
+
+                    PlayerHuman playerHuman = game.getHumanPlayer();
+                    playerHuman.setTurnState(true);
+
+                    Platform.runLater(() ->
+                            labelGame.setText("Your turn"));
+
+                    // Espera hasta que el usuario juegue una carta
+                    game.waitUntilRoundEnds();
+
+                } else {
+
+                    if (game.isMachinePlayerAbleToPlay(t)) {
+
+                        game.processCardPlayedByMachinePlayer(t);
+
+                        Platform.runLater(() -> {
+                            showCardPile();
+                        });
+
+                    } else {
+
+                        Platform.runLater(() -> {
+                            eliminatePlayer(t);
+                            labelGame.setText("Player " + t + " was eliminated");
+                        });
+                    }
+                }
+            }
+        }
+
+        Platform.runLater(() -> {
+            labelGame.setText("The game is over");
+
+            try {
+
+                changeView(game.getWinner());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
     //TASK : image could be null , why?
     protected void showHandCardPlayer(){
@@ -165,7 +236,7 @@ public class PlayController {
         }
         if (turnPlayer==3){
             vbBot3.setVisible(false);
-            vbBot3.setVisible(false);
+            vbBot3.setManaged(false);
         }
     }
 
