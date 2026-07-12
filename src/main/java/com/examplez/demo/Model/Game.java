@@ -79,18 +79,35 @@ public class Game {
             return currentPlayer.isAbleToPlay(currentSumGame, maximumSumGame);
     }
     public void processCardPlayedByMachinePlayer(int turnMachinePlayer){
-        PlayerMachine playerMachine= getMachinePlayerByTurn(turnMachinePlayer);
+      /*  PlayerMachine playerMachine= getMachinePlayerByTurn(turnMachinePlayer);
         Card cardPlayed=playerMachine.cardPlayed(currentSumGame, maximumSumGame);
         currentSumGame+=cardPlayed.getCardValue();
         addCardPlayedToDiscardPile(cardPlayed);
         currenCardPlayed=cardPlayed;
         addDeskCardToPlayerHand(turnMachinePlayer);
+        playerMachine.deleteCard(cardPlayed);*/
+        PlayerMachine playerMachine = getMachinePlayerByTurn(turnMachinePlayer);
+
+        Card cardPlayed = playerMachine.cardPlayed(currentSumGame, maximumSumGame);
+
+        int value = cardPlayed.getCardValue();
+
+        if ("A".equals(cardPlayed.getIdCard())) {
+            value = getAceValueForMachine();
+        }
+
+        currentSumGame += value;
+
+        addCardPlayedToDiscardPile(cardPlayed);
+        currenCardPlayed = cardPlayed;
+        addDeskCardToPlayerHand(turnMachinePlayer);
         playerMachine.deleteCard(cardPlayed);
     }
 
-    public void processCardPlayedByHumanPlayer(String id){
+    public void processCardPlayedByHumanPlayer(String id,int aceValue){
         Player playerHuman=getHumanPlayer();
         Card cardPlayed= getCardById(id);
+        int cardValued= cardPlayed.getCardValue();
         currentSumGame+=cardPlayed.getCardValue();
         addCardPlayedToDiscardPile(cardPlayed);
         currenCardPlayed=cardPlayed;
@@ -186,6 +203,12 @@ public class Game {
     public synchronized void endRound() {
         getHumanPlayer().setTurnState(false);
         notifyAll();
+    }
+    public int getAceValueForMachine() {
+        if (currentSumGame + 10 <= maximumSumGame) {
+            return 10;
+        }
+        return 1;
     }
 
 }

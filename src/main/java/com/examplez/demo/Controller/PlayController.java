@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -79,6 +80,7 @@ public class PlayController {
             @Override
             protected Void call() throws Exception{
                 List<Integer>turnPlayers=game.getTurnPlayers();
+
                 while(turnPlayers.size()>1){
                     for(int t: game.getTurnPlayers()){
                         System.out.println(game.currentSumGame);
@@ -98,6 +100,7 @@ public class PlayController {
                             Platform.runLater(() -> {
                             labelGame.setText("is turn of player" + t);});
                             if (game.isMachinePlayerAbleToPlay(t)) {
+                                /*
                                 int waitingTime= ThreadLocalRandom.current().nextInt(1, 4);
                                 Thread thread =new Thread(()->{
                                     try {
@@ -110,7 +113,22 @@ public class PlayController {
                                         throw new RuntimeException(e);
                                     }
                                 });
-                                thread.start();
+                                thread.start();*/
+                                int waitingTime = ThreadLocalRandom.current().nextInt(1, 4);
+
+                                // Espera para simular que la IA está pensando
+                                Thread.sleep(waitingTime * 1000L);
+
+                                // La IA juega
+                                Platform.runLater(() -> {
+
+                                    game.processCardPlayedByMachinePlayer(t);
+
+                                    showCardPile();
+                                });
+
+                                // Espera un poco para que el usuario vea la carta antes del siguiente turno
+                                Thread.sleep(500);
                             }
                             else {
                                 game.eliminatePlayer(t);
@@ -123,10 +141,17 @@ public class PlayController {
                     }
                     turnPlayers=game.getTurnPlayers();
                 }
-                labelGame.setText("the game is over");
-                return null;
-            }
-        };
+                int winner = turnPlayers.get(0);
+
+                Platform.runLater(() -> {
+                    try {
+                        changeView(winner);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            return null;}
+          };
         return task;
     }
     protected void showHandCardPlayer(){
@@ -179,7 +204,16 @@ public class PlayController {
     protected void playCard(Card card){
 
         if(game.isPlayerHumanCardValid(card)){
-            game.processCardPlayedByHumanPlayer(card.getIdCard());
+
+            int aceValue = card.getCardValue();
+
+
+            if("40".equals(card.getIdCard())){
+                System.out.println("Entró al if del As");
+                aceValue = askAceValue();
+            }
+
+            game.processCardPlayedByHumanPlayer(card.getIdCard(), aceValue);
             showCardPile();
             showHandCardPlayer();
             showCardPile();
@@ -200,8 +234,19 @@ public class PlayController {
         }
         if (turnPlayer==3){
             vbBot3.setVisible(false);
-            vbBot3.setVisible(false);
+            vbBot3.setManaged(false);
         }
+    }
+    private int askAceValue() {
+
+        ChoiceDialog<Integer> dialog =
+                new ChoiceDialog<>(10, List.of(1, 10));
+
+        dialog.setTitle("Ace");
+        dialog.setHeaderText("Choose the value of the Ace");
+        dialog.setContentText("Value:");
+
+        return dialog.showAndWait().orElse(1);
     }
 
     private void changeView(int idWinner) throws IOException {
