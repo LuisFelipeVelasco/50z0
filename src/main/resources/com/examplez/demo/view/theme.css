@@ -27,6 +27,7 @@
     -fx-border-color: #4f6d97;
     -fx-border-width: 2;
     -fx-text-fill: #dbe4f0;
+    -fx-padding: 14 30 14 30;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 9, 0.22, 0, 4);
     -fx-cursor: hand;
 }
@@ -146,4 +147,37 @@
     -fx-background-color: radial-gradient(radius 100%, rgba(79,109,151,0.16), transparent);
     -fx-background-radius: 100;
     -fx-padding: 10;
+}
+
+/* ===================================================================
+   FINAL VIEW — misma familia visual que el menú y el juego
+   =================================================================== */
+
+/* Texto secundario (p. ej. "¿Desea jugar otra partida?") */
+.subtitle-label {
+    -fx-text-fill: #c7d2e0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 5, 0.22, 0, 3);
+}
+
+/* Botón secundario (p. ej. "Abandonar juego"): mismo lenguaje visual
+   que .player-button pero deliberadamente más discreto — para no competir
+   con la acción principal (heurística de prevención de errores: la
+   opción de salir/abandonar no debe ser la más llamativa). */
+.player-button-secondary {
+    -fx-background-color: rgba(20,27,40,0.4);
+    -fx-border-color: rgba(79,109,151,0.55);
+    -fx-text-fill: #9fb2c9;
+}
+.player-button-secondary:hover {
+    -fx-background-color: rgba(30,40,58,0.6);
+    -fx-border-color: #7fa0c9;
+    -fx-text-fill: #dbe4f0;
+    -fx-effect: dropshadow(gaussian, rgba(79,109,151,0.4), 10, 0.25, 0, 3);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+.player-button-secondary:pressed {
+    -fx-background-color: rgba(15,20,30,0.6);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
 }
