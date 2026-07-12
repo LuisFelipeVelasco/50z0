@@ -164,7 +164,7 @@
             </HBox>
          </children>
       </VBox>
-      <HBox fx:id="hbDecks" alignment="CENTER" layoutX="379.0" layoutY="314.0" prefHeight="197.0" prefWidth="435.0" spacing="150.0" styleClass="deck-row">
+      <HBox fx:id="hbDecks" alignment="CENTER" layoutX="379.0" layoutY="314.0" prefHeight="215.0" prefWidth="435.0" spacing="130.0" styleClass="deck-row">
          <children>
             <ImageView fx:id="imCardDeck" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true" styleClass="card-visual clickable-card">
                <image>
