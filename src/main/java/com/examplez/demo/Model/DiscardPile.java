@@ -44,7 +44,7 @@ public class DiscardPile {
      * @return list view containing recyclable discarded cards
      */
     List<Card> getCardsExceptLastOne(){
-        return DiscardPile.subList(0,DiscardPile.size()-2);
+        return DiscardPile.subList(0,DiscardPile.size()-1);
     }
 
 }
