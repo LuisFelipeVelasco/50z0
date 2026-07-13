@@ -34,7 +34,7 @@ public class Game {
 
         if (numberOfPlayers < 2) {
             throw new IllegalArgumentException(
-                    "The game must have at least two players.."
+                    "The game must have at least two players"
             );
         }
 
@@ -173,11 +173,8 @@ public class Game {
             if (p.getTurn() == turnPlayer && p instanceof PlayerMachine machine) {
                 return machine;
             }
-
-            throw new PlayerNotFoundException(
-                    "Machine player with turn " + turnPlayer + " was not found.");
         }
-        return null;
+        throw new PlayerNotFoundException("Machine player with turn " + turnPlayer + " was not found.");
     }
 
     /**
@@ -193,10 +190,8 @@ public class Game {
             if (p.getTurn() == 0 && p instanceof PlayerHuman playerHuman) {
                 return playerHuman;
             }
-            throw new PlayerNotFoundException(
-                    "Human player was not found");
         }
-        return null;
+        throw new PlayerNotFoundException("Human player was not found");
     }
     public Card getLastCardPlayed() {
         return discardPileGame.getLastCard();
@@ -278,7 +273,6 @@ public class Game {
             throw new InvalidCardException(
                     "It is not possible to play this card because the sum would exceed " + maximumSumGame
             );
-
         }
 
     }

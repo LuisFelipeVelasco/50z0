@@ -104,11 +104,10 @@ public class PlayController {
                                     try {
                                         Thread.sleep(waitingTime* 1000L);
                                         Platform.runLater(()->{
-
                                             try {
                                                 game.processCardPlayedByMachinePlayer(t);
                                             } catch (InvalidCardException e) {
-                                                throw new RuntimeException(e);
+                                                labelGame.setText(e.getMessage());
                                             }
                                             showCardPile();
                                         });
