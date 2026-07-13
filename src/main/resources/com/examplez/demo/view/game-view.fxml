@@ -17,12 +17,12 @@
             <Image url="@../images/game-image.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelGame" layoutX="547.0" layoutY="281.0" text="turn of ..." textFill="#c7c3c3">
+      <Label fx:id="labelGame" alignment="CENTER" contentDisplay="CENTER" layoutX="365.0" layoutY="276.0" prefHeight="32.0" prefWidth="486.0" text="turn of ..." textAlignment="CENTER" textFill="#c7c3c3">
          <font>
-            <Font name="JetBrainsMono NF Bold" size="17.0" />
+            <Font name="Arial Black" size="22.0" />
          </font>
       </Label>
-      <VBox fx:id="vbBot2" alignment="TOP_CENTER" layoutX="355.0" layoutY="29.0" prefHeight="200.0" prefWidth="499.0">
+      <VBox fx:id="vbBot2" alignment="TOP_CENTER" layoutX="359.0" layoutY="32.0" prefHeight="200.0" prefWidth="499.0">
          <children>
             <TextField fx:id="tfSecondBotName" alignment="CENTER" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="461.0" style="-fx-background-color: #c7c3c3;" text="Bot 2">
                <font>
@@ -57,7 +57,7 @@
                </children>
             </HBox>
          </children></VBox>
-      <VBox fx:id="hbPlayer" alignment="CENTER" layoutX="365.0" layoutY="564.0" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="vbHuman" alignment="CENTER" layoutX="365.0" layoutY="564.0" prefHeight="200.0" prefWidth="100.0">
          <children>
             <HBox fx:id="hbPlayerCards" prefHeight="100.0" prefWidth="200.0" spacing="14.0">
                <children>
@@ -92,7 +92,7 @@
                </VBox.margin>
             </TextField>
          </children></VBox>
-      <VBox fx:id="vbBot3" alignment="CENTER" layoutX="-107.0" layoutY="281.0" prefHeight="200.0" prefWidth="100.0" rotate="-90.0">
+      <VBox fx:id="vbBot3" alignment="CENTER" layoutX="-124.0" layoutY="295.0" prefHeight="200.0" prefWidth="100.0" rotate="-90.0">
          <children>
             <TextField fx:id="tfThirdBotName" alignment="CENTER" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="461.0" style="-fx-background-color: #c7c3c3;" text="Bot 3">
                <font>
@@ -164,13 +164,18 @@
             </HBox>
          </children>
       </VBox>
-      <HBox fx:id="hbDecks" layoutX="422.0" layoutY="325.0" prefHeight="100.0" prefWidth="200.0" spacing="150.0">
+      <HBox fx:id="hbDecks" alignment="CENTER" layoutX="366.0" layoutY="325.0" prefHeight="150.0" prefWidth="486.0" spacing="80.0">
          <children>
             <ImageView fx:id="imCardDeck" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Cards/00-00.png" />
                </image>
             </ImageView>
+            <Label fx:id="labelScore" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="100.0" text="50" textAlignment="CENTER" textFill="#c7c3c3">
+               <font>
+                  <Font name="Berlin Sans FB" size="40.0" />
+               </font>
+            </Label>
             <ImageView fx:id="imCardInPlay" fitHeight="155.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Cards/00-00.png" />

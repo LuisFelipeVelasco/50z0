@@ -13,7 +13,7 @@ public class Player {
         this.turn = turn;
     }
     public List<Card> getHandCard(){
-        return Collections.unmodifiableList(handCard);
+        return handCard;
 
     }
     public void addCardToHand(Card card){

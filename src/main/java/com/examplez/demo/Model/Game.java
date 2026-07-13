@@ -14,8 +14,7 @@ public class Game {
     int maximumSumGame = 50;
     List<Player> players;
     Desk deskGame;
-    DiscardPile discardPileGame;
-    Card currenCardPlayed;
+    public DiscardPile discardPileGame;
 
 
     public Game(int numberOfPlayers) {
@@ -27,11 +26,11 @@ public class Game {
         List<Card> setCards = setCards();
         Card initialCard = drawRandomCard(setCards);
         discardPileGame = new DiscardPile(new ArrayList<>(List.of(initialCard)));
-        currentSumGame = initialCard.getCardValue();
+        if(initialCard.getCardValue()==-1)currentSumGame=1;
+        else currentSumGame = initialCard.getCardValue();
         setPlayers(setCards);
         deskGame = new Desk(setCards);
     }
-
     List<Card> setCards() {
         List<Card> setCards = new ArrayList<>();
         Path directory = Path.of("src/main/resources/com/examplez/demo/images/Cards");
@@ -49,7 +48,6 @@ public class Game {
         }
         return setCards;
     }
-
     void setPlayers(List<Card> setCards) {
         for (int i = 0; i < numberOfPlayers; i++) {
             List<Card> handPlayer = new ArrayList<>();
@@ -65,12 +63,19 @@ public class Game {
             }
         }
     }
-
-
-
    public boolean isPlayerHumanCardValid(Card cardPlayed) {
-        if (maximumSumGame < cardPlayed.getCardValue() + currentSumGame) return false;
-        return true;
+       if(cardPlayed.getCardValue()==-1 && ( 10+currentSumGame<=maximumSumGame || 1+currentSumGame<=maximumSumGame )) return true;
+       return (maximumSumGame >= cardPlayed.getCardValue() + currentSumGame && !(cardPlayed.getCardValue()==-1));
+    }
+    public List<Integer> getPossibleAceValues(){
+        List<Integer> possibleAceValues= new ArrayList<>();
+        if(10+currentSumGame<=maximumSumGame) {
+            possibleAceValues.add(10);
+            possibleAceValues.add(1);
+            return possibleAceValues;
+        }
+        possibleAceValues.add(1);
+        return possibleAceValues;
     }
 
 
@@ -78,30 +83,35 @@ public class Game {
             PlayerMachine currentPlayer = getMachinePlayerByTurn(turnPlayer);
             return currentPlayer.isAbleToPlay(currentSumGame, maximumSumGame);
     }
+
+    public boolean isHumanPlayerAbleToPlay() {
+        PlayerHuman currentPlayer = getHumanPlayer();
+        return currentPlayer.isAbleToPlay(currentSumGame, maximumSumGame);
+    }
+
     public void processCardPlayedByMachinePlayer(int turnMachinePlayer){
-        PlayerMachine playerMachine= getMachinePlayerByTurn(turnMachinePlayer);
-        Card cardPlayed=playerMachine.cardPlayed(currentSumGame, maximumSumGame);
-        currentSumGame+=cardPlayed.getCardValue();
+        PlayerMachine playerMachine = getMachinePlayerByTurn(turnMachinePlayer);
+        Card cardPlayed = playerMachine.cardPlayed(currentSumGame, maximumSumGame);
+        int value = cardPlayed.getCardValue();
+        if (cardPlayed.getCardValue()==-1) value = getAceValueForMachine();
+        currentSumGame += value;
         addCardPlayedToDiscardPile(cardPlayed);
-        currenCardPlayed=cardPlayed;
-        addDeskCardToPlayerHand(turnMachinePlayer);
         playerMachine.deleteCard(cardPlayed);
     }
 
-    public void processCardPlayedByHumanPlayer(String id){
+    public void processCardPlayedByHumanPlayer(String id,int aceValue){
         Player playerHuman=getHumanPlayer();
         Card cardPlayed= getCardById(id);
-        currentSumGame+=cardPlayed.getCardValue();
+        currentSumGame+=aceValue;
         addCardPlayedToDiscardPile(cardPlayed);
-        currenCardPlayed=cardPlayed;
-        addDeskCardToPlayerHand(0);
         playerHuman.deleteCard(cardPlayed);
+        addDeskCardToPlayerHand(0);
     }
 
     void addCardPlayedToDiscardPile(Card cardPlayed) {
         discardPileGame.addNewCard(cardPlayed);
     }
-    void addDeskCardToPlayerHand(int turnPlayer){
+    public void addDeskCardToPlayerHand(int turnPlayer){
         for(int i=0;i<players.size();i++){
             Player currentPlayer=players.get(i);
             if(currentPlayer.getTurn()==turnPlayer){
@@ -182,10 +192,16 @@ public class Game {
             wait();
         }
     }
-
     public synchronized void endRound() {
         getHumanPlayer().setTurnState(false);
         notifyAll();
     }
+    public int getAceValueForMachine() {
+        if (currentSumGame + 10 <= maximumSumGame) {
+            return 10;
+        }
+        return 1;
+    }
+
 
 }
