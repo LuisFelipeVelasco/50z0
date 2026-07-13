@@ -21,28 +21,77 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * FXML controller for the active card-game view ({@code game-view.fxml}).
+ *
+ * <p>Coordinates the JavaFX interface with the {@link Game} model, renders the
+ * human player's hand and the discard pile, manages human card selection, and
+ * runs the turn loop for human and machine players on a background task.</p>
+ *
+ * <p>All interface changes made from the background task are delegated to the
+ * JavaFX Application Thread through {@link Platform#runLater(Runnable)}.</p>
+ *
+ * @see Game
+ * @see PlayerHuman
+ * @see PlayerMachine
+ * @version 1.0
+ */
 public class PlayController {
+    // -----------------------------------------------------------------------
+    // Game and FXML state
+    // -----------------------------------------------------------------------
+
+    /** Model that contains the rules and mutable state of the current match. */
     private Game game;
+    /** Container used to represent the first machine player. */
     @FXML
     private VBox vbBot1;
+    /** Container used to represent the second machine player. */
     @FXML
     private VBox vbBot2;
+    /** Container used to represent the third machine player. */
     @FXML
     private VBox vbBot3;
+    /** Container used to represent the human player. */
     @FXML
     private VBox vbHuman;
+    /** Image views that display the cards currently held by the human player. */
     private ArrayList<ImageView> cardsImages;
+    /** Image view that displays the last card placed on the discard pile. */
     @FXML
     private ImageView imCardInPlay;
+    /** Horizontal container whose children represent the human player's cards. */
     @FXML
     private HBox hbPlayerCards;
+    /** Label used for turn information, validation messages, and game feedback. */
     @FXML
     private Label labelGame;
+    /** Label that displays the current accumulated game score. */
     @FXML
     private Label labelScore;
+    /** Number of participants selected before the match starts. */
     int numberOfPlayers;
+    /** Primary stage used to navigate to the final result view. */
     Stage stage;
+    // -----------------------------------------------------------------------
+    // Controller setup
+    // -----------------------------------------------------------------------
+
+    /**
+     * Stores the primary application stage for later scene changes.
+     *
+     * @param stage application stage that hosts the game
+     */
     public void setStage(Stage stage){this.stage=stage;}
+    /**
+     * Initializes the board for the selected number of players.
+     *
+     * <p>The method updates player visibility, collects the card image views
+     * from the FXML container, and starts a new game session.</p>
+     *
+     * @param numberOfPlayers total number of human and machine players
+     * @throws InterruptedException if game startup is interrupted
+     */
     @FXML
 
     public void initialize(int numberOfPlayers) throws InterruptedException {
@@ -56,6 +105,12 @@ public class PlayController {
         }
         startGame();
     }
+    /**
+     * Creates the game model, deals the initial cards, renders the starting
+     * interface, and launches the turn-management task.
+     *
+     * @throws InterruptedException if startup is interrupted
+     */
     protected void startGame() throws InterruptedException {
         game = new Game(numberOfPlayers);
         game.startGame();
@@ -63,12 +118,27 @@ public class PlayController {
         showCardPile();
         createThreadTurnTask();
     }
+    // -----------------------------------------------------------------------
+    // Turn management
+    // -----------------------------------------------------------------------
+
+    /** Creates and starts the daemon thread that executes the turn loop. */
     protected void createThreadTurnTask(){
         Task<Void> task=controlTurnTask();
         Thread thread =new Thread(task);
         thread.setDaemon(true);
         thread.start();
     }
+    /**
+     * Builds the background task that controls successive player turns until
+     * only one participant remains.
+     *
+     * <p>Human turns wait for a card-selection event, while machine turns are
+     * processed automatically after a short randomized delay. Eliminated
+     * players are removed from the model and hidden from the interface.</p>
+     *
+     * @return a task containing the complete turn-control loop
+     */
     protected Task<Void> controlTurnTask(){
         Task<Void> task = new Task<>(){
             @Override
@@ -123,9 +193,6 @@ public class PlayController {
 
                             }
                     }
-                        Platform.runLater(() -> {
-                            labelScore.setText(game.getCurrentSumGame() + "");
-                        });
                         turnPlayers=game.getTurnPlayers();
                         if(turnPlayers.size()==1) break;
 
@@ -143,6 +210,14 @@ public class PlayController {
           };
         return task;
     }
+    // -----------------------------------------------------------------------
+    // Card rendering and interaction
+    // -----------------------------------------------------------------------
+
+    /**
+     * Displays the current human hand by resolving each card's image resource
+     * and attaching its click handler.
+     */
     protected void showHandCardPlayer(){
 
         List<Card> hand = game.getHandHumanPlayer();
@@ -167,6 +242,15 @@ public class PlayController {
             addListener(cardsImages.get(i), card);
         }
     }
+    /**
+     * Registers the click action for one card image.
+     *
+     * <p>The card is processed only while the human player's turn flag is
+     * active.</p>
+     *
+     * @param imageView image node associated with the card
+     * @param card model card represented by the image
+     */
     protected void addListener(ImageView imageView, Card card){
         imageView.setOnMouseClicked(event -> {
             if(game.getHumanPlayer().geTurnState()){
@@ -174,6 +258,7 @@ public class PlayController {
             }
         });
     }
+    /** Displays the last played card and refreshes the accumulated score. */
     protected void showCardPile(){
         Card card=game.getLastCardPlayed();
         String path = "/com/examplez/demo/images/Cards/"
@@ -188,6 +273,19 @@ public class PlayController {
         });
     }
 
+    // -----------------------------------------------------------------------
+    // Human actions
+    // -----------------------------------------------------------------------
+
+    /**
+     * Attempts to play a card selected by the human player.
+     *
+     * <p>Valid ace cards may require the player to choose between the values
+     * 1 and 10. After a valid play, the hand, pile, and round state are
+     * updated. Invalid cards produce a feedback message instead.</p>
+     *
+     * @param card card selected from the human player's hand
+     */
     protected void playCard(Card card){
 
         if(game.isPlayerHumanCardValid(card)){
@@ -208,6 +306,12 @@ public class PlayController {
         }
         else {labelGame.setText("The card selected is not valid");}
     }
+    /**
+     * Removes a player from the game and hides the corresponding interface
+     * container.
+     *
+     * @param turnPlayer turn identifier of the player to eliminate
+     */
     protected void eliminatePlayer(int turnPlayer) {
         game.eliminatePlayer(turnPlayer);
 
@@ -228,6 +332,12 @@ public class PlayController {
             vbBot3.setVisible(false);
             vbBot3.setManaged(false);
         }
+    /**
+     * Opens a choice dialog that asks the human player to assign a value to an
+     * ace card.
+     *
+     * @return selected ace value, or {@code 1} when the dialog is dismissed
+     */
     }
     protected int askAceValue() {
         ChoiceDialog<Integer> dialog =
@@ -239,6 +349,16 @@ public class PlayController {
         return dialog.showAndWait().orElse(1);
     }
 
+    // -----------------------------------------------------------------------
+    // View navigation and layout
+    // -----------------------------------------------------------------------
+
+    /**
+     * Loads the final view and passes the winner identifier to its controller.
+     *
+     * @param idWinner turn identifier of the last remaining player
+     * @throws IOException if {@code final-view.fxml} cannot be loaded
+     */
     protected void changeView(int idWinner) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/examplez/demo/view/final-view.fxml"));
         Parent root = fxmlLoader.load();
@@ -250,6 +370,11 @@ public class PlayController {
         stage.setResizable(false);
         stage.show();
     }
+    /**
+     * Shows or hides machine-player containers according to the selected
+     * number of participants. The managed state is changed together with the
+     * visible state so hidden containers do not occupy layout space.
+     */
     protected void updateBoard() {
 
         vbBot1.setVisible(numberOfPlayers >= 2);
