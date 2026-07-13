@@ -185,7 +185,6 @@ public class PlayController {
                                 }
                             }
                             else{
-                                game.eliminatePlayer(0);
                                 eliminatePlayer(0);
                                 Platform.runLater(() -> {
                                     labelGame.setText("You didn´t have valid cards");
