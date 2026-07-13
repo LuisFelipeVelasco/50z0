@@ -124,7 +124,7 @@ public class PlayController {
                             }
                     }
                         Platform.runLater(() -> {
-                            labelScore.setText(game.currentSumGame + "");
+                            labelScore.setText(game.getCurrentSumGame() + "");
                         });
                         turnPlayers=game.getTurnPlayers();
                         if(turnPlayers.size()==1) break;
@@ -174,7 +174,7 @@ public class PlayController {
             }
         });
     }
-    private void showCardPile(){
+    protected void showCardPile(){
         Card card=game.getLastCardPlayed();
         String path = "/com/examplez/demo/images/Cards/"
                 + card.getIdCard()
@@ -184,7 +184,7 @@ public class PlayController {
         Image image = new Image(getClass().getResourceAsStream(path));
         imCardInPlay.setImage(image);
         Platform.runLater(() -> {
-            labelScore.setText(game.currentSumGame + "");
+            labelScore.setText(game.getCurrentSumGame() + "");
         });
     }
 
@@ -229,7 +229,7 @@ public class PlayController {
             vbBot3.setManaged(false);
         }
     }
-    private int askAceValue() {
+    protected int askAceValue() {
         ChoiceDialog<Integer> dialog =
                 new ChoiceDialog<>(10, List.of(1, 10));
 
@@ -239,7 +239,7 @@ public class PlayController {
         return dialog.showAndWait().orElse(1);
     }
 
-    private void changeView(int idWinner) throws IOException {
+    protected void changeView(int idWinner) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/examplez/demo/view/final-view.fxml"));
         Parent root = fxmlLoader.load();
         FinalController finalController =fxmlLoader.getController();
@@ -250,7 +250,7 @@ public class PlayController {
         stage.setResizable(false);
         stage.show();
     }
-    private void updateBoard() {
+    protected void updateBoard() {
 
         vbBot1.setVisible(numberOfPlayers >= 2);
         vbBot1.setManaged(numberOfPlayers >= 2);

@@ -1,7 +1,7 @@
 package com.examplez.demo.Model;
 import java.util.List;
 public class DiscardPile {
-    private List<Card>DiscardPile;
+   List<Card>DiscardPile;
    public DiscardPile(List<Card>DiscardPile){
         this.DiscardPile=DiscardPile;
     }

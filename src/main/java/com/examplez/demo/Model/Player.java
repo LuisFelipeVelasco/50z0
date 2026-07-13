@@ -6,7 +6,7 @@ import java.util.Collections;
 
 
 public class Player {
-    protected final List<Card> handCard=new ArrayList<>();
+    List<Card> handCard=new ArrayList<>();
     int turn;
     public  Player(List<Card>handCard,int turn){
         this.handCard.addAll(handCard);

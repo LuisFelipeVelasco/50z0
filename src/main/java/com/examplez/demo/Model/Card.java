@@ -1,8 +1,8 @@
 package com.examplez.demo.Model;
 
 public class Card {
-    private final int cardValue;
-    private final String idCard;
+    int cardValue;
+    String idCard;
    public Card(int cardValue,String idCard){
         this.cardValue=cardValue;
         this.idCard=idCard;

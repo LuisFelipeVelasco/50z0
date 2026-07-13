@@ -15,21 +15,21 @@ public class MenuController {
     int numberOfPlayers;
     public void setStage(Stage stage){this.stage=stage;}
     @FXML
-    private void onButtonTwoPlayers() throws IOException, InterruptedException {
+    protected void onButtonTwoPlayers() throws IOException, InterruptedException {
         numberOfPlayers=2;
         changeView();
     }
     @FXML
-    private void onButtonThreePlayers() throws IOException, InterruptedException {
+    protected void onButtonThreePlayers() throws IOException, InterruptedException {
         numberOfPlayers=3;
         changeView();
     }
     @FXML
-    private void onButtonFourPlayers() throws IOException, InterruptedException {
+    protected void onButtonFourPlayers() throws IOException, InterruptedException {
         numberOfPlayers=4;
         changeView();
     }
-    private void changeView() throws IOException, InterruptedException {
+    protected void changeView() throws IOException, InterruptedException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/examplez/demo/view/game-view.fxml"));
         Parent root = fxmlLoader.load();
         PlayController playController =fxmlLoader.getController();

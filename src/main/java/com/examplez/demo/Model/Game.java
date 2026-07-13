@@ -10,11 +10,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Game {
     int numberOfPlayers;
     int numberOfCardsInHand = 4;
-    public int currentSumGame = 0;
+    int currentSumGame = 0;
     int maximumSumGame = 50;
     List<Player> players;
     Desk deskGame;
-    public DiscardPile discardPileGame;
+    DiscardPile discardPileGame;
 
 
     public Game(int numberOfPlayers) {
@@ -201,6 +201,9 @@ public class Game {
             return 10;
         }
         return 1;
+    }
+    public int getCurrentSumGame(){
+        return currentSumGame;
     }
 
 

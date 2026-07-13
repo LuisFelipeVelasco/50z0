@@ -2,7 +2,7 @@ package com.examplez.demo.Model;
 import java.util.List;
 
 public class Desk {
-    private List<Card> Desk;
+    List<Card> Desk;
     Desk(List<Card>Desk){
         this.Desk=Desk;
     }
