@@ -44,21 +44,35 @@ public class FinalController {
             winnerLabel.setText("Bot " + idWinner+ " is the winner");
         }
     }
+    /**
+     * Loads the menu interface and displays it in the current application window.
+     * The current stage is obtained through the winner label, and the menu
+     * controller receives the same stage so it can manage future scene changes.
+     *
+     * @throws IOException if the menu FXML file cannot be loaded
+     */
     @FXML
-    private void onContinueButton() throws IOException {
+    protected void onContinueButton() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/examplez/demo/view/menu-view.fxml"));
         Parent root = fxmlLoader.load();
-        Stage stage =(Stage)winnerLabel.getScene().getWindow();
+
+        Stage stage = (Stage) winnerLabel.getScene().getWindow();
         Scene scene = new Scene(root, 800, 600);
+
         MenuController menuController = fxmlLoader.getController();
         menuController.setStage(stage);
+
         stage.setTitle("Menu");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Closes the JavaFX application when the close button is pressed.
+     */
     @FXML
-    private void onCloseButton(){
+    protected void onCloseButton() {
         Platform.exit();
     }
 }
