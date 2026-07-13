@@ -1,0 +1,171 @@
+/* ===================================================================
+   TEMA COMPARTIDO — "Sala de juego clásica" (paleta azul acero/marino)
+   Usado por menu-view.fxml y game-view.fxml para mantener consistencia.
+   Base: #233048 (marino) + #4f6d97 (azul acero), con un acento cálido
+   en dorado reservado SOLO para lo importante: el jugador humano, la
+   opción recomendada y el indicador de turno (contraste frío/cálido
+   = Von Restorff aplicado de forma consistente en toda la app).
+   =================================================================== */
+
+/* --- Fondo general (Pane raíz de menu-view) --- */
+.root-pane {
+    -fx-background-color: linear-gradient(to bottom right, #141b28 0%, #1b2537 45%, #233048 100%);
+}
+
+/* --- Título / mensajes (menu-view) --- */
+.title-label {
+    -fx-text-fill: #eef2f7;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6, 0.25, 0, 3);
+}
+
+/* --- Botones de jugadores (menu-view): base común, heurística de consistencia --- */
+.player-button {
+    -fx-background-color: linear-gradient(to bottom, #3b4c68 0%, #263447 100%);
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-color: #4f6d97;
+    -fx-border-width: 2;
+    -fx-text-fill: #dbe4f0;
+    -fx-padding: 14 30 14 30;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 9, 0.22, 0, 4);
+    -fx-cursor: hand;
+}
+
+.player-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #4d6284 0%, #33445c 100%);
+    -fx-border-color: #7fa0c9;
+    -fx-effect: dropshadow(gaussian, rgba(79,109,151,0.65), 18, 0.4, 0, 5);
+    -fx-scale-x: 1.06;
+    -fx-scale-y: 1.06;
+}
+
+.player-button:pressed {
+    -fx-background-color: #202b3b;
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 4, 0.15, 0, 1);
+}
+
+.player-button:focused {
+    -fx-border-color: #7fa0c9;
+    -fx-border-width: 2.5;
+}
+
+.player-button-featured {
+    -fx-background-color: linear-gradient(to bottom, #e3c46a 0%, #d4af37 100%);
+    -fx-border-color: #7a5c1e;
+    -fx-text-fill: #1c2431;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.55), 12, 0.3, 0, 4);
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+
+}
+
+.player-button-featured:hover {
+    -fx-background-color: linear-gradient(to bottom, #efd489 0%, #dfc158 100%);
+    -fx-border-color: #8a6b28;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.8), 20, 0.45, 0, 6);
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
+}
+
+.player-button-featured:pressed {
+    -fx-background-color: #c7a233;
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+.seat-panel {
+    -fx-background-color: rgba(14,19,29,0.6);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(79,109,151,0.4);
+    -fx-border-width: 1.4;
+    -fx-border-radius: 18;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 14, 0.28, 0, 5);
+}
+
+/* El asiento del jugador humano se distingue del de los bots
+   (Von Restorff: cálido vs. frío, igual que en el menú). */
+.player-seat {
+    -fx-border-color: rgba(212,175,55,0.75);
+    -fx-background-color: rgba(38,30,15,0.55);
+}
+
+.bot-name-tag {
+    -fx-background-color: linear-gradient(to bottom, #7e93b3, #56698c);
+    -fx-background-radius: 10;
+    -fx-border-color: #233048;
+    -fx-border-width: 1.4;
+    -fx-border-radius: 10;
+    -fx-text-fill: #10161f;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 7, 0.22, 0, 3);
+}
+
+.player-name-tag {
+    -fx-background-color: linear-gradient(to bottom, #e3c46a, #d4af37);
+    -fx-background-radius: 10;
+    -fx-border-color: #7a5c1e;
+    -fx-border-width: 1.4;
+    -fx-border-radius: 10;
+    -fx-text-fill: #241a0f;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 10, 0.3, 0, 3);
+}
+
+.turn-label {
+    -fx-text-fill: #f1c94f;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6, 0.25, 0, 3);
+}
+
+.card-visual {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 11, 0.22, 0, 5);
+}
+
+.clickable-card {
+    -fx-cursor: hand;
+}
+.clickable-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(79,109,151,0.75), 18, 0.35, 0, 5);
+    -fx-scale-x: 1.06;
+    -fx-scale-y: 1.06;
+}
+
+.deck-row {
+    -fx-background-color: radial-gradient(radius 100%, rgba(79,109,151,0.16), transparent);
+    -fx-background-radius: 100;
+    -fx-padding: 10;
+}
+
+/* ===================================================================
+   FINAL VIEW — misma familia visual que el menú y el juego
+   =================================================================== */
+
+/* Texto secundario (p. ej. "¿Desea jugar otra partida?") */
+.subtitle-label {
+    -fx-text-fill: #c7d2e0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 5, 0.22, 0, 3);
+}
+
+/* Botón secundario (p. ej. "Abandonar juego"): mismo lenguaje visual
+   que .player-button pero deliberadamente más discreto — para no competir
+   con la acción principal (heurística de prevención de errores: la
+   opción de salir/abandonar no debe ser la más llamativa). */
+.player-button-secondary {
+    -fx-background-color: rgba(20,27,40,0.4);
+    -fx-border-color: rgba(79,109,151,0.55);
+    -fx-text-fill: #9fb2c9;
+}
+.player-button-secondary:hover {
+    -fx-background-color: rgba(30,40,58,0.6);
+    -fx-border-color: #7fa0c9;
+    -fx-text-fill: #dbe4f0;
+    -fx-effect: dropshadow(gaussian, rgba(79,109,151,0.4), 10, 0.25, 0, 3);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+.player-button-secondary:pressed {
+    -fx-background-color: rgba(15,20,30,0.6);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
