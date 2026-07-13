@@ -1,81 +1,208 @@
+
 /* ===================================================================
-   TEMA COMPARTIDO — "Sala de juego clásica" (paleta azul acero/marino)
-   Usado por menu-view.fxml y game-view.fxml para mantener consistencia.
-   Base: #233048 (marino) + #4f6d97 (azul acero), con un acento cálido
-   en dorado reservado SOLO para lo importante: el jugador humano, la
-   opción recomendada y el indicador de turno (contraste frío/cálido
-   = Von Restorff aplicado de forma consistente en toda la app).
+   SHARED THEME — "Classic game room" (steel blue/navy palette)
+   Used by menu-view.fxml , game-view.fxml and final-view.fxml  to maintain consistency.
+
+   Base colors: #233048 (navy) + #4f6d97 (steel blue), with a warm
+   gold accent reserved ONLY for important elements: the human player,
+   the recommended option, and the turn indicator.
+
+   The cold/warm contrast applies the Von Restorff effect consistently
+   throughout the application.
    =================================================================== */
 
-/* --- Fondo general (Pane raíz de menu-view) --- */
+/* --- General background for the root Pane in menu-view --- */
 .root-pane {
-    -fx-background-color: linear-gradient(to bottom right, #141b28 0%, #1b2537 45%, #233048 100%);
+    -fx-background-color: linear-gradient(
+        to bottom right,
+        #141b28 0%,
+        #1b2537 45%,
+        #233048 100%
+    );
 }
 
-/* --- Título / mensajes (menu-view) --- */
+/* --- Main title and message labels in menu-view --- */
 .title-label {
     -fx-text-fill: #eef2f7;
     -fx-text-alignment: center;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6, 0.25, 0, 3);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.6),
+        6,
+        0.25,
+        0,
+        3
+    );
 }
 
-/* --- Botones de jugadores (menu-view): base común, heurística de consistencia --- */
+/* --- Subtitle labels with lower visual importance than the main title --- */
+.subtitle-label {
+    -fx-text-fill: #c7d2e0;
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.6),
+        5,
+        0.22,
+        0,
+        3
+    );
+}
+
+/* --- Common style for player-selection buttons in menu-view.
+   This maintains visual consistency between all player options. --- */
 .player-button {
-    -fx-background-color: linear-gradient(to bottom, #3b4c68 0%, #263447 100%);
+    -fx-background-color: linear-gradient(
+        to bottom,
+        #3b4c68 0%,
+        #263447 100%
+    );
     -fx-background-radius: 14;
     -fx-border-radius: 14;
     -fx-border-color: #4f6d97;
     -fx-border-width: 2;
     -fx-text-fill: #dbe4f0;
     -fx-padding: 14 30 14 30;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 9, 0.22, 0, 4);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.55),
+        9,
+        0.22,
+        0,
+        4
+    );
     -fx-cursor: hand;
 }
 
+/* Highlights a player button when the mouse is placed over it. */
 .player-button:hover {
-    -fx-background-color: linear-gradient(to bottom, #4d6284 0%, #33445c 100%);
+    -fx-background-color: linear-gradient(
+        to bottom,
+        #4d6284 0%,
+        #33445c 100%
+    );
     -fx-border-color: #7fa0c9;
-    -fx-effect: dropshadow(gaussian, rgba(79,109,151,0.65), 18, 0.4, 0, 5);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(79,109,151,0.65),
+        18,
+        0.4,
+        0,
+        5
+    );
     -fx-scale-x: 1.06;
     -fx-scale-y: 1.06;
 }
 
+/* Provides visual feedback while a player button is being pressed. */
 .player-button:pressed {
     -fx-background-color: #202b3b;
     -fx-scale-x: 0.97;
     -fx-scale-y: 0.97;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 4, 0.15, 0, 1);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.55),
+        4,
+        0.15,
+        0,
+        1
+    );
 }
 
+/* Makes keyboard focus visible for accessibility and navigation. */
 .player-button:focused {
     -fx-border-color: #7fa0c9;
     -fx-border-width: 2.5;
 }
 
+/* Von Restorff effect: the "3 players" button is the recommended option.
+   Its warm gold color breaks the cold-color pattern so the user's eye
+   notices it before the other options. */
 .player-button-featured {
-    -fx-background-color: linear-gradient(to bottom, #e3c46a 0%, #d4af37 100%);
+    -fx-background-color: linear-gradient(
+        to bottom,
+        #e3c46a 0%,
+        #d4af37 100%
+    );
     -fx-border-color: #7a5c1e;
     -fx-text-fill: #1c2431;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.55), 12, 0.3, 0, 4);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(212,175,55,0.55),
+        12,
+        0.3,
+        0,
+        4
+    );
     -fx-border-radius: 12px;
     -fx-background-radius: 12px;
-
 }
 
+/* Increases the visual emphasis of the recommended option on hover. */
 .player-button-featured:hover {
-    -fx-background-color: linear-gradient(to bottom, #efd489 0%, #dfc158 100%);
+    -fx-background-color: linear-gradient(
+        to bottom,
+        #efd489 0%,
+        #dfc158 100%
+    );
     -fx-border-color: #8a6b28;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.8), 20, 0.45, 0, 6);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(212,175,55,0.8),
+        20,
+        0.45,
+        0,
+        6
+    );
     -fx-scale-x: 1.08;
     -fx-scale-y: 1.08;
 }
 
+/* Provides visual feedback when the recommended button is pressed. */
 .player-button-featured:pressed {
     -fx-background-color: #c7a233;
     -fx-scale-x: 0.97;
     -fx-scale-y: 0.97;
 }
 
+/* Secondary player button used for less important or optional actions. */
+.player-button-secondary {
+    -fx-background-color: rgba(20,27,40,0.4);
+    -fx-border-color: rgba(79,109,151,0.55);
+    -fx-text-fill: #9fb2c9;
+}
+
+/* Makes a secondary button more visible when the mouse is over it. */
+.player-button-secondary:hover {
+    -fx-background-color: rgba(30,40,58,0.6);
+    -fx-border-color: #7fa0c9;
+    -fx-text-fill: #dbe4f0;
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(79,109,151,0.4),
+        10,
+        0.25,
+        0,
+        3
+    );
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* Provides visual feedback when a secondary button is pressed. */
+.player-button-secondary:pressed {
+    -fx-background-color: rgba(15,20,30,0.6);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* ===================================================================
+   GAME VIEW — Uses the same visual family as the menu
+   =================================================================== */
+
+/* Seat panel displayed behind every player or bot.
+   It visually groups the player's name and cards without requiring
+   additional layout nodes. This follows the grouping and consistency
+   usability principles. */
 .seat-panel {
     -fx-background-color: rgba(14,19,29,0.6);
     -fx-background-radius: 18;
@@ -83,89 +210,124 @@
     -fx-border-width: 1.4;
     -fx-border-radius: 18;
     -fx-padding: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 14, 0.28, 0, 5);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.6),
+        14,
+        0.28,
+        0,
+        5
+    );
 }
 
-/* El asiento del jugador humano se distingue del de los bots
-   (Von Restorff: cálido vs. frío, igual que en el menú). */
+/* The human player's seat is visually different from the bot seats.
+   This applies the Von Restorff effect through warm-versus-cold colors,
+   following the same visual rule used in the menu. */
 .player-seat {
     -fx-border-color: rgba(212,175,55,0.75);
     -fx-background-color: rgba(38,30,15,0.55);
 }
 
+/* Bot name labels use a neutral steel-blue color. */
 .bot-name-tag {
-    -fx-background-color: linear-gradient(to bottom, #7e93b3, #56698c);
+    -fx-background-color: linear-gradient(
+        to bottom,
+        #7e93b3,
+        #56698c
+    );
     -fx-background-radius: 10;
     -fx-border-color: #233048;
     -fx-border-width: 1.4;
     -fx-border-radius: 10;
     -fx-text-fill: #10161f;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 7, 0.22, 0, 3);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.45),
+        7,
+        0.22,
+        0,
+        3
+    );
 }
 
+/* The human player's name label uses a gold brass color so it is
+   immediately distinguishable from the bot labels. */
 .player-name-tag {
-    -fx-background-color: linear-gradient(to bottom, #e3c46a, #d4af37);
+    -fx-background-color: linear-gradient(
+        to bottom,
+        #e3c46a,
+        #d4af37
+    );
     -fx-background-radius: 10;
     -fx-border-color: #7a5c1e;
     -fx-border-width: 1.4;
     -fx-border-radius: 10;
     -fx-text-fill: #241a0f;
-    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 10, 0.3, 0, 3);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(212,175,55,0.5),
+        10,
+        0.3,
+        0,
+        3
+    );
 }
 
+/* Turn indicator: improves the visibility of the current system state.
+   The warm accent indicates that this information is important. */
 .turn-label {
     -fx-text-fill: #f1c94f;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6, 0.25, 0, 3);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.6),
+        6,
+        0.25,
+        0,
+        3
+    );
 }
 
+/* Base shadow applied to all cards on the game table.
+   The stronger shadow gives the cards a greater sense of elevation. */
 .card-visual {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 11, 0.22, 0, 5);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.55),
+        11,
+        0.22,
+        0,
+        5
+    );
 }
 
+/* Only interactive cards, such as the player's cards, the deck,
+   and the discard pile, receive a hand cursor and hover feedback.
+   This provides a clear visual affordance. */
 .clickable-card {
     -fx-cursor: hand;
 }
+
+/* Steel-blue glow displayed when the mouse is over an interactive card. */
 .clickable-card:hover {
-    -fx-effect: dropshadow(gaussian, rgba(79,109,151,0.75), 18, 0.35, 0, 5);
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(79,109,151,0.75),
+        18,
+        0.35,
+        0,
+        5
+    );
     -fx-scale-x: 1.06;
     -fx-scale-y: 1.06;
 }
 
+/* Subtle halo displayed behind the card deck and discard pile. */
 .deck-row {
-    -fx-background-color: radial-gradient(radius 100%, rgba(79,109,151,0.16), transparent);
+    -fx-background-color: radial-gradient(
+        radius 100%,
+        rgba(79,109,151,0.16),
+        transparent
+    );
     -fx-background-radius: 100;
     -fx-padding: 10;
-}
-
-/* ===================================================================
-   FINAL VIEW — misma familia visual que el menú y el juego
-   =================================================================== */
-
-/* Texto secundario (p. ej. "¿Desea jugar otra partida?") */
-.subtitle-label {
-    -fx-text-fill: #c7d2e0;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 5, 0.22, 0, 3);
-}
-
-/* Botón secundario (p. ej. "Abandonar juego"): mismo lenguaje visual
-   que .player-button pero deliberadamente más discreto — para no competir
-   con la acción principal (heurística de prevención de errores: la
-   opción de salir/abandonar no debe ser la más llamativa). */
-.player-button-secondary {
-    -fx-background-color: rgba(20,27,40,0.4);
-    -fx-border-color: rgba(79,109,151,0.55);
-    -fx-text-fill: #9fb2c9;
-}
-.player-button-secondary:hover {
-    -fx-background-color: rgba(30,40,58,0.6);
-    -fx-border-color: #7fa0c9;
-    -fx-text-fill: #dbe4f0;
-    -fx-effect: dropshadow(gaussian, rgba(79,109,151,0.4), 10, 0.25, 0, 3);
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
-}
-.player-button-secondary:pressed {
-    -fx-background-color: rgba(15,20,30,0.6);
-    -fx-scale-x: 0.98;
-    -fx-scale-y: 0.98;
 }
