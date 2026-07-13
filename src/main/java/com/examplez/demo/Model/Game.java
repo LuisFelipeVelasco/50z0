@@ -1,4 +1,7 @@
 package com.examplez.demo.Model;
+import com.examplez.demo.Exceptions.InvalidCardException;
+import com.examplez.demo.Exceptions.PlayerNotFoundException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +21,23 @@ public class Game {
     Card currenCardPlayed;
 
 
+    /**
+     * Creates a new game instance.
+     *
+     * @param numberOfPlayers number of players participating
+     *        in the game
+     *
+     * @throws IllegalArgumentException if fewer than two players
+     *         are specified
+     */
     public Game(int numberOfPlayers) {
+
+        if (numberOfPlayers < 2) {
+            throw new IllegalArgumentException(
+                    "The game must have at least two players.."
+            );
+        }
+
         this.numberOfPlayers = numberOfPlayers;
     }
 
@@ -78,9 +97,23 @@ public class Game {
             PlayerMachine currentPlayer = getMachinePlayerByTurn(turnPlayer);
             return currentPlayer.isAbleToPlay(currentSumGame, maximumSumGame);
     }
-    public void processCardPlayedByMachinePlayer(int turnMachinePlayer){
+
+
+    /**
+     * Processes the card automatically selected by the machine player.
+     *
+     * @param turnMachinePlayer turn identifier of the machine player
+     *
+     * @throws InvalidCardException if the selected card is not
+     *         valid according to the current game rules via the
+     *         validateCard method
+     */
+    public void processCardPlayedByMachinePlayer(int turnMachinePlayer) throws InvalidCardException {
         PlayerMachine playerMachine= getMachinePlayerByTurn(turnMachinePlayer);
         Card cardPlayed=playerMachine.cardPlayed(currentSumGame, maximumSumGame);
+
+        validateCard(cardPlayed);
+
         currentSumGame+=cardPlayed.getCardValue();
         addCardPlayedToDiscardPile(cardPlayed);
         currenCardPlayed=cardPlayed;
@@ -88,9 +121,22 @@ public class Game {
         playerMachine.deleteCard(cardPlayed);
     }
 
-    public void processCardPlayedByHumanPlayer(String id){
+
+    /**
+     * Processes the card selected by the human player and updates
+     * the game state.
+     *
+     * @param id identifier of the selected card
+     *
+     * @throws InvalidCardException if the selected card cannot
+     *         legally be played via the validateCard method
+     */
+    public void processCardPlayedByHumanPlayer(String id) throws InvalidCardException{
         Player playerHuman=getHumanPlayer();
         Card cardPlayed= getCardById(id);
+
+        validateCard(cardPlayed);
+
         currentSumGame+=cardPlayed.getCardValue();
         addCardPlayedToDiscardPile(cardPlayed);
         currenCardPlayed=cardPlayed;
@@ -110,19 +156,45 @@ public class Game {
         }
         if(deskGame.isEmpty()) restartDesk();
     }
+
+
+    /**
+     * Returns the machine player assigned to the specified turn.
+     *
+     * @param turnPlayer machine player's turn identifier
+     *
+     * @return the corresponding machine player
+     *
+     * @throws PlayerNotFoundException if no machine player
+     *         matches the specified turn
+     */
     PlayerMachine getMachinePlayerByTurn(int turnPlayer){
         for (Player p:players ) {
             if (p.getTurn() == turnPlayer && p instanceof PlayerMachine machine) {
                 return machine;
             }
+
+            throw new PlayerNotFoundException(
+                    "Machine player with turn " + turnPlayer + " was not found.");
         }
         return null;
     }
+
+    /**
+     * Returns the human player participating in the game.
+     *
+     * @return the human player
+     *
+     * @throws PlayerNotFoundException if the human player
+     *         does not exist in the current game
+     */
     public PlayerHuman getHumanPlayer(){
         for (Player p:players ) {
             if (p.getTurn() == 0 && p instanceof PlayerHuman playerHuman) {
                 return playerHuman;
             }
+            throw new PlayerNotFoundException(
+                    "Human player was not found");
         }
         return null;
     }
@@ -186,6 +258,29 @@ public class Game {
     public synchronized void endRound() {
         getHumanPlayer().setTurnState(false);
         notifyAll();
+    }
+
+
+    /**
+     * Validates whether a card can be played without exceeding
+     * the maximum game score.
+     *
+     * @param cardPlayed card selected by the player
+     *
+     * @throws InvalidCardException if playing the card would
+     *         cause the accumulated score to exceed the maximum
+     *         allowed value
+     */
+    public void validateCard(Card cardPlayed) throws InvalidCardException {
+
+        if (maximumSumGame < cardPlayed.getCardValue() + currentSumGame) {
+
+            throw new InvalidCardException(
+                    "It is not possible to play this card because the sum would exceed " + maximumSumGame
+            );
+
+        }
+
     }
 
 }

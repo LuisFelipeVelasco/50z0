@@ -1,5 +1,6 @@
 package com.examplez.demo.Controller;
 
+import com.examplez.demo.Exceptions.InvalidCardException;
 import com.examplez.demo.GameLauncher;
 import com.examplez.demo.Model.*;
 import javafx.application.Platform;
@@ -103,7 +104,12 @@ public class PlayController {
                                     try {
                                         Thread.sleep(waitingTime* 1000L);
                                         Platform.runLater(()->{
-                                            game.processCardPlayedByMachinePlayer(t);
+
+                                            try {
+                                                game.processCardPlayedByMachinePlayer(t);
+                                            } catch (InvalidCardException e) {
+                                                throw new RuntimeException(e);
+                                            }
                                             showCardPile();
                                         });
                                     } catch (InterruptedException e) {
@@ -176,16 +182,18 @@ public class PlayController {
         imCardInPlay.setImage(image);
     }
 
-    protected void playCard(Card card){
+    protected void playCard(Card card) {
 
-        if(game.isPlayerHumanCardValid(card)){
+        try{
             game.processCardPlayedByHumanPlayer(card.getIdCard());
             showCardPile();
             showHandCardPlayer();
             showCardPile();
             game.endRound();
         }
-        else {labelGame.setText("The card selected is not valid");}
+        catch (InvalidCardException e){
+            labelGame.setText(e.getMessage());
+        }
     }
     protected void eliminatePlayer(int turnPlayer) {
         game.eliminatePlayer(turnPlayer);
