@@ -299,24 +299,22 @@ public class PlayController {
      * @param card card selected from the human player's hand
      */
     protected void playCard(Card card){
-
-
         try{
             game.isPlayerHumanCardValid(card);
-            int aceValue = card.getCardValue();
-            if(aceValue==-1){
+            int cardValue = card.getCardValue();
+            if(cardValue==-1){
                 List<Integer> posibleAceValues= game.getPossibleAceValues();
                 if(posibleAceValues.size()==2){
-                    aceValue = askAceValue();
-                    if(aceValue==-1){
+                    cardValue = askAceValue();
+                    if(cardValue==-1){
                         return;
                     }
                 }
                 else{
-                    aceValue= posibleAceValues.get(0);
+                    cardValue= posibleAceValues.get(0);
                 }
             }
-            game.processCardPlayedByHumanPlayer(card.getIdCard(), aceValue);
+            game.processCardPlayedByHumanPlayer(card.getIdCard(), cardValue);
             showHandCardPlayer();
             showCardPile();
             game.endRound();
